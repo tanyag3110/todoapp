@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AuthenticationTokenPreferenceState">
+    <option name="authTokenMap">
+      <map>
+        <entry key="todoapp" value="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlrNldybzd6RmpuWndjTUY0NDNBTndXNEI0QkhzTGNOdUFldzBKaTktMFUifQ.eyJ0eXBlIjoiYXQiLCJjbGllbnRJZCI6ImI5N2ZiZWY3LWNhZDktNGU1Ni05ODUwLTM5ZTg2YzhmZGY2MSIsInJlcXVlc3RlZENsaWVudElkIjoiYjk3ZmJlZjctY2FkOS00ZTU2LTk4NTAtMzllODZjOGZkZjYxIiwiaWRwIjoibXNmdCIsImlzcyI6Imh0dHBzOi8vc2xpbmdzaG90Lmxpb25pcy5haSIsInJvbGVzIjpbInVzZXIiXSwianRpIjoiVlFKTjBWUG1pdyIsIlVzZXJJbmZvIjp7ImlkIjoiOGUyMWVkZWUtNDk5YS00NGFhLWJiNGEtMGZhNjJiNDE5NGVhIiwiZW1haWwiOiJ0YW5nb3lhbDZAcHVibGljaXNncm91cGUubmV0IiwiZGlzcGxheU5hbWUiOiJUYW55YSBHb3lhbCJ9LCJhcHBLZXkiOiJza183NTczNTMyMTI0YmFmIiwiYXBwSWQiOiIxZTBhYzdmMi00NjYyLTQyM2QtODY4Zi1kNzliOTk0NWU4Y2QiLCJzZXJ2aWNlcyI6WyJsbG0iLCJzdGF0ZSJdLCJhcHBOYW1lIjoiUFNTbGluZ3Nob3QiLCJpbmR1c3RyeSI6IjQ1M2Q5ZmFlLWY2M2MtNGU5NC04MjFlLTA3MmQ0NzQwODk2YSIsImlhdCI6MTc2MjQ5NjQwMSwiZXhwIjoxNzYyNTA3MjAxfQ.kJ3QC7yflw99WWU0azQKp6Bj_ENhClH6C6q5RH-kW8jb_MUeUczWIsa-B4N_UoE4SA4xTDUeCRMHnLOfS3kj8FKkmXBpwGYIf-HQwejgqvUOTD-Z4VqbXUuWpx2CJMWdkHnTb1VTgJ7IqCMZES5wYJFtvqDiJEmjF8ov7lReC85Qlru-o522XbpQxEiOFeu5v8iiEFp72eFgMf54F2OGFIdYAtqlEDwMJgIktQKvZ5e8DHrJOdWIjUJceVnkIXAi0cKwuiChVxv3UcoHPOO2Yj_kxFvDJDDA2WmxGaia0DuPomARAT4vLOA3B34hSRf4_Ij4f1G8hEFFuUYH3HLpJQ" />
+      </map>
+    </option>
+    <option name="refreshTokenMap">
+      <map>
+        <entry key="todoapp" value="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlrNldybzd6RmpuWndjTUY0NDNBTndXNEI0QkhzTGNOdUFldzBKaTktMFUifQ.eyJ0eXBlIjoicnQiLCJjbGllbnRJZCI6ImI5N2ZiZWY3LWNhZDktNGU1Ni05ODUwLTM5ZTg2YzhmZGY2MSIsInJlcXVlc3RlZENsaWVudElkIjoiYjk3ZmJlZjctY2FkOS00ZTU2LTk4NTAtMzllODZjOGZkZjYxIiwiaWRwIjoibXNmdCIsImlzcyI6Imh0dHBzOi8vc2xpbmdzaG90Lmxpb25pcy5haSIsInJvbGVzIjpbInVzZXIiXSwianRpIjoiUnBvaTdEbVVUWCIsIlVzZXJJbmZvIjp7ImlkIjoiOGUyMWVkZWUtNDk5YS00NGFhLWJiNGEtMGZhNjJiNDE5NGVhIiwiZW1haWwiOiJ0YW5nb3lhbDZAcHVibGljaXNncm91cGUubmV0IiwiZGlzcGxheU5hbWUiOiJUYW55YSBHb3lhbCJ9LCJhcHBLZXkiOiJza183NTczNTMyMTI0YmFmIiwiYXBwSWQiOiIxZTBhYzdmMi00NjYyLTQyM2QtODY4Zi1kNzliOTk0NWU4Y2QiLCJzZXJ2aWNlcyI6WyJsbG0iLCJzdGF0ZSJdLCJhcHBOYW1lIjoiUFNTbGluZ3Nob3QiLCJpbmR1c3RyeSI6IjQ1M2Q5ZmFlLWY2M2MtNGU5NC04MjFlLTA3MmQ0NzQwODk2YSIsImlhdCI6MTc2MjQ5NjQwMSwiZXhwIjoxNzYyNjY5MjAxfQ.ZQvmVW0MhnFPHA4T2NwH75b_ZtSgvC5Lrz-dvtX8swZW86zlAUk34xw1kTLwHdfMaJs9Y9PlfHKYLAyI2Z7XuZCECglvacHLtX1II47ub8YeFYshehzD-kQt7AyJ9jA6203ss_sHIJYm5gv1J7Yo2WYbMnfwEIp2swCzsjZQ0xQclqxi6rWanxYwmf7vBD36YRjajuSW9G-744W54dqayK-HYytS4xmPdHTVnMC4a1hWYVqRgRXme71byGlO-c2np82jrYaurebk4hxb7tkYMdfl2VzKAOAMGzD0kVdHatvgSrx-VbmFR0TKOH2bXgTuT2VTGcBlLpdxw_kt9vnuSA" />
+      </map>
+    </option>
+    <option name="timeWhenAuthTokenWasLastUpdated">
+      <map>
+        <entry key="todoapp" value="1762496401749" />
+      </map>
+    </option>
+    <option name="clientIdMap">
+      <map>
+        <entry key="todoapp" value="b97fbef7-cad9-4e56-9850-39e86c8fdf61" />
+      </map>
+    </option>
+  </component>
+</project>

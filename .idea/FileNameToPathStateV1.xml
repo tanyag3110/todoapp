@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FileNameToPathState">
+    <option name="fileNameToPathMap">
+      <map>
+        <entry key="auth-service/build.gradle">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/auth-service/build.gradle" />
+              <option value="$PROJECT_DIR$/auth-service/build.gradle" />
+            </list>
+          </value>
+        </entry>
+        <entry key="build.gradle">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/build.gradle" />
+              <option value="$PROJECT_DIR$/build.gradle" />
+              <option value="$PROJECT_DIR$/build.gradle" />
+              <option value="$PROJECT_DIR$/build.gradle" />
+              <option value="$PROJECT_DIR$/build.gradle" />
+            </list>
+          </value>
+        </entry>
+        <entry key="main/resources/application.yml">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" />
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
