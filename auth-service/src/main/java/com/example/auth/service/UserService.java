@@ -98,7 +98,7 @@ public class UserService {
         user.setFailedLoginCount(user.getFailedLoginCount() + 1);
         if (user.getFailedLoginCount() >= 3) {
             user.setLocked(true);
-            String body = "<p>Your account is locked due to multiple failed attempts. Please re-register to unlock or contact support.</p>";
+            String body = "Your account is locked due to multiple failed attempts. Please re-register to unlock or contact support.";
             emailService.sendEmail(user.getEmail(), "Account locked", body);
             logRepo.save(createLog(user, "LOCK", ip, "Locked after failed attempts"));
         } else {
@@ -114,8 +114,88 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(User user) {
-        userRepo.delete(user);
-        logRepo.save(createLog(user, "DEREGISTER", null, "User deleted"));
+    public void deleteUser(String username) {
+        userRepo.findByUsername(username).ifPresent(userRepo::delete);
     }
+
+    @Transactional
+    public void sendUnlockToken(String username, String appUrl, int tokenValidityHours) {
+        var opt = userRepo.findByUsername(username);
+        if (opt.isEmpty()) return; // avoid username enumeration
+
+        User user = opt.get();
+
+        if (!user.isLocked()) return; // do nothing if not locked
+
+        String token = UUID.randomUUID().toString();
+        VerificationToken v = VerificationToken.builder()
+                .token(token)
+                .user(user)
+                .expiryDate(Instant.now().plus(tokenValidityHours, ChronoUnit.HOURS))
+                .build();
+        tokenRepo.save(v);
+
+        String link = appUrl + "/api/auth/unlock/confirm?token=" + token;
+        String body = "<p>Your account is locked due to failed login attempts.</p>"
+                + "<p>Click to unlock:</p>"
+                + "<p><a href=\"" + link + "\">Unlock Account</a></p>";
+
+        emailService.sendEmail(user.getEmail(), "Unlock Your Account", body);
+        logRepo.save(createLog(user, "UNLOCK_REQUEST", null, "User requested unlock email"));
+    }
+
+    @Transactional
+    public String confirmUnlock(String token) {
+        var opt = tokenRepo.findByToken(token);
+        if (opt.isEmpty()) throw new IllegalArgumentException("Invalid token");
+
+        var v = opt.get();
+        if (v.getExpiryDate().isBefore(Instant.now())) {
+            tokenRepo.delete(v);
+            throw new IllegalArgumentException("Token expired. Request unlock again.");
+        }
+
+        User user = v.getUser();
+        user.setLocked(false);
+        user.setFailedLoginCount(0);
+        userRepo.save(user);
+        tokenRepo.delete(v);
+
+        logRepo.save(createLog(user, "UNLOCK", null, "Account unlocked"));
+        return "Account unlocked. You may now login.";
+    }
+
+    @Transactional
+    public void updateEmail(String username, String newEmail) {
+        var userOpt = userRepo.findByUsername(username);
+        if (userOpt.isEmpty()) throw new IllegalArgumentException("User not found");
+        User user = userOpt.get();
+
+        // Check if email already exists
+        if (userRepo.findByEmail(newEmail).isPresent()) {
+            throw new IllegalArgumentException("Email already in use");
+        }
+
+        user.setEmail(newEmail);
+        user.setEnabled(false); // Require reconfirmation after email change
+        userRepo.save(user);
+
+        // Generate new verification token
+        String token = UUID.randomUUID().toString();
+        VerificationToken ver = VerificationToken.builder()
+                .token(token)
+                .user(user)
+                .expiryDate(Instant.now().plus(24, ChronoUnit.HOURS))
+                .build();
+        tokenRepo.save(ver);
+
+        String link = "http://localhost:8081/api/auth/confirm?token=" + token;
+        String body = "<p>Your email has been updated. Confirm new email:</p>"
+                + "<p><a href=\"" + link + "\">Confirm</a></p>";
+
+        emailService.sendEmail(newEmail, "Confirm New Email", body);
+
+        logRepo.save(createLog(user, "EMAIL_UPDATE", null, "Email updated, reconfirmation required"));
+    }
+
 }

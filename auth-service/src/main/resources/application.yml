@@ -1,10 +1,94 @@
+#spring:
+#  datasource:
+#    # Example: use PostgreSQL in production. For quick dev you can switch to H2 (see commented H2 block)
+#    url: jdbc:postgresql://localhost:5432/authdb
+#    username: postgres
+#    password: 5432
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        format_sql: true
+#
+#  logging:
+#  level:
+#    org.springframework.security: DEBUG
+#
+##  mail:
+##    host: localhost
+##    port: 1025
+##    username:
+##    password:
+##    properties:
+##      mail.smtp.auth: false
+##      mail.smtp.starttls.enable: false
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: tanyastpauls@gmail.com
+#    password: igbwkpcfgbphfajy   # <-- no spaces
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+##          connectiontimeout: 5000
+##          timeout: 5000
+##          writetimeout: 5000
+#        debug: true
+##  security:
+##    oauth2:
+##          client:
+##            registration:
+##              google:
+##                client-id:
+##                client-secret:
+##                redirect-uri:
+##                scope:
+##                  - openid
+##                  - profile
+##                  - email
+#
+#server:
+#  port: 8081
+#
+#app:
+#  jwt:
+#    secret: 12345678912345678912345678912345
+#    accessTokenValiditySeconds: 900   # 15 minutes
+#    refreshTokenValiditySeconds: 1209600 # 14 days
+#  registration:
+#    tokenValidityHours: 24
+#
+#
+## For fast dev switch to H2 (uncomment and override datasource)
+## spring:
+##   datasource:
+##     url: jdbc:h2:mem:authdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+##     driver-class-name: org.h2.Driver
+##     username: sa
+##     password:
+# auth-service/src/main/resources/application.yml
+#  igbwkpcfgbphfajy
+
+# auth-service/src/main/resources/application.yml
+
+server:
+  port: 8081
+
 spring:
+  application:
+    name: auth-service
+
   datasource:
-    # Example: use PostgreSQL in production. For quick dev you can switch to H2 (see commented H2 block)
     url: jdbc:postgresql://localhost:5432/authdb
     username: postgres
     password: 5432
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,62 +96,35 @@ spring:
       hibernate:
         format_sql: true
 
-  logging:
-  level:
-    org.springframework.security: DEBUG
-
-#  mail:
-#    host: localhost
-#    port: 1025
-#    username:
-#    password:
-#    properties:
-#      mail.smtp.auth: false
-#      mail.smtp.starttls.enable: false
   mail:
     host: smtp.gmail.com
-    port: 587
-    username: tanyastpauls@gmail.com
-    password: vznptrvijsivfvqp   # <-- no spaces
+    port: 587                     # use 465 if 587 is blocked on your normal network
+    username: tanyastpauls@gmail.com   # e.g. your@gmail.com
+    password: igbwkpcfgbphfajy   # 16-char App Password (NOT your Google password)
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-#          connectiontimeout: 5000
-#          timeout: 5000
-#          writetimeout: 5000
-        debug: true
-#  security:
-#    oauth2:
-#          client:
-#            registration:
-#              google:
-#                client-id:
-#                client-secret:
-#                redirect-uri:
-#                scope:
-#                  - openid
-#                  - profile
-#                  - email
+            required: true        # fail fast if TLS not negotiated
+          ssl.trust: smtp.gmail.com
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+        debug: true               # turn off later
 
-server:
-  port: 8081
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.mail: DEBUG
 
 app:
   jwt:
     secret: 12345678912345678912345678912345
-    accessTokenValiditySeconds: 900   # 15 minutes
-    refreshTokenValiditySeconds: 1209600 # 14 days
+    accessTokenValiditySeconds: 900
+    refreshTokenValiditySeconds: 1209600
   registration:
     tokenValidityHours: 24
-
-
-# For fast dev switch to H2 (uncomment and override datasource)
-# spring:
-#   datasource:
-#     url: jdbc:h2:mem:authdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-#     driver-class-name: org.h2.Driver
-#     username: sa
-#     password:
+  mail:
+    from: tanyastpauls@gmail.com       # or a verified “Send mail as” alias

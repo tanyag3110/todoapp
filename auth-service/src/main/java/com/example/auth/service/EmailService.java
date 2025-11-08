@@ -12,21 +12,16 @@ public class EmailService {
     public EmailService(JavaMailSender mailSender) { this.mailSender = mailSender; }
 
     public void sendEmail(String to, String subject, String htmlBody) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(htmlBody);
-        mailSender.send(simpleMailMessage);
-        //        try {
-//            MimeMessage msg = mailSender.createMimeMessage();
-//            MimeMessageHelper helper = new MimeMessageHelper(msg, true, "UTF-8");
-//            helper.setFrom("tanyastpauls@gmail.com");
-//            helper.setTo(to);
-//            helper.setSubject(subject);
-//            helper.setText(htmlBody, true);
-//            mailSender.send(msg);
-//        } catch (Exception ex) {
-//            throw new RuntimeException("Failed to send mail", ex);
-//        }
+        try {
+            MimeMessage msg = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(msg, true, "UTF-8");
+            helper.setFrom("tanyastpauls@gmail.com");
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(htmlBody, true);
+            mailSender.send(msg);
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to send mail", ex);
+        }
     }
 }

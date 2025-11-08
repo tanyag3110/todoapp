@@ -2,6 +2,7 @@ package com.example.auth.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,9 @@ import java.util.Date;
 public class JwtProvider {
 
     private final Key key;
+    @Getter
     private final long accessValiditySeconds;
+    @Getter
     private final long refreshValiditySeconds;
 
     public JwtProvider(@Value("${app.jwt.secret}") String secret,
@@ -54,11 +57,4 @@ public class JwtProvider {
         return validateToken(token).getBody().getSubject();
     }
 
-    public long getAccessValiditySeconds() {
-        return accessValiditySeconds;
-    }
-
-    public long getRefreshValiditySeconds() {
-        return refreshValiditySeconds;
-    }
 }

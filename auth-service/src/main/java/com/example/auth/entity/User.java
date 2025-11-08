@@ -3,6 +3,8 @@ package com.example.auth.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,17 +26,28 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private boolean enabled = false;
+    private String role;
 
-    @Column(nullable = false)
-    private boolean locked = false;
+    private boolean enabled;
+    private boolean locked;
 
-    @Column(nullable = false)
-    private int failedLoginCount = 0;
+    private int failedLoginCount;
+    private Instant lastFailedAttempt;
 
-    @Column(nullable = false)
     private Instant createdAt = Instant.now();
+    private Instant updatedAt;
 
-    @Column(nullable = false)
-    private String role; // CUSTOMER, INTERNAL, APPLICATION
+    @PrePersist
+    void onCreate() {
+        createdAt = Instant.now();
+        updatedAt = Instant.now();
+        failedLoginCount = 0;
+        locked = false;
+        enabled = false;
+    }
+
+    @PreUpdate
+    void onUpdate() {
+        updatedAt = Instant.now();
+    }
 }
