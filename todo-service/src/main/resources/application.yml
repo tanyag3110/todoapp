@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tododb
+    username: postgres
+    password: 5432
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app:
+  jwt:
+    secret: ee6b0a4c9076e43844b00924e47144e97d704bc1764471cdb06c20023f96837a  # MUST MATCH auth-service

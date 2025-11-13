@@ -14,6 +14,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.List;
+
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
@@ -35,6 +37,14 @@ public class SecurityConfig {
         var jwtFilter = new JwtAuthenticationFilter(jwtProvider, userDetailsService);
 
         http
+                .cors(cors -> cors.configurationSource(req -> {
+                    var c = new org.springframework.web.cors.CorsConfiguration();
+                    c.setAllowedOrigins(List.of("http://localhost:5173"));
+                    c.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    c.setAllowedHeaders(List.of("*"));
+                    c.setAllowCredentials(true);
+                    return c;
+                }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(

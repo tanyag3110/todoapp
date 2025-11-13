@@ -17,4 +17,7 @@ public class RegisterRequest {
     private String email;
 
     private String role; // CUSTOMER, INTERNAL, APPLICATION
+
+    @NotBlank(message = "CAPTCHA is required")
+    private String captcha;
 }

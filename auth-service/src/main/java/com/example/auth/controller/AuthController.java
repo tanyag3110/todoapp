@@ -2,6 +2,7 @@ package com.example.auth.controller;
 
 import com.example.auth.dto.*;
 import com.example.auth.service.AuthService;
+import com.example.auth.service.CaptchaService;
 import com.example.auth.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -9,22 +10,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
     private final UserService userService;
     private final AuthService authService;
+    private final CaptchaService captchaService;
 
-    public AuthController(UserService userService, AuthService authService) {
+    public AuthController(UserService userService, AuthService authService, CaptchaService captchaService) {
         this.userService = userService;
         this.authService = authService;
+        this.captchaService = captchaService;
     }
 
     @PostMapping("/register")
-    public String register(@Valid @RequestBody RegisterRequest req, HttpServletRequest servlet) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req, HttpServletRequest servlet) {
+        if (!captchaService.verify(req.getCaptcha())) {
+            return ResponseEntity.badRequest().body("Invalid CAPTCHA");
+        }
         String appUrl = getAppUrl(servlet);
         userService.register(req, appUrl, 24);
-        return "Registration initiated. Check email to confirm.";
+        return ResponseEntity.ok("Registration initiated. Check email to confirm.");
     }
 
     @GetMapping("/confirm")
@@ -33,9 +41,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest req, HttpServletRequest servlet) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req, HttpServletRequest servlet) {
+        if (!captchaService.verify(req.getCaptcha())) {
+            return ResponseEntity.badRequest().body("Invalid CAPTCHA");
+        }
         String ip = servlet.getRemoteAddr();
-        return authService.login(req, ip);
+        return ResponseEntity.ok(authService.login(req, ip));
     }
 
     @PostMapping("/refresh")
@@ -78,5 +89,18 @@ public class AuthController {
                                            @RequestBody ProfileUpdateRequest req) {
         userService.updateEmail(user.getUsername(), req.getEmail());
         return ResponseEntity.ok("Profile updated");
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        userService.sendPasswordResetLink(email);
+        return ResponseEntity.ok("Password reset link sent (check mail logs)");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String token,
+                                                @RequestParam String newPassword) {
+        userService.resetPassword(token, newPassword);
+        return ResponseEntity.ok("Password successfully reset. You can now login.");
     }
 }
