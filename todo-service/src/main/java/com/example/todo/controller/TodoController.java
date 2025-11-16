@@ -26,6 +26,7 @@ public class TodoController {
     @GetMapping
     public List<Todo> list(HttpServletRequest req) {
         String user = username(req);
+        System.out.println("Username in controller: " + username(req));
         log.info("GET /api/todos for user: {}", user);
         return service.getTodos(user);
     }
@@ -34,6 +35,7 @@ public class TodoController {
     public Todo create(HttpServletRequest req, @RequestBody Map<String, String> body) {
         String user = username(req);
         String title = body.get("title");
+        System.out.println("Username in controller: " + username(req));
         log.info("POST /api/todos for user: {}, title: {}", user, title);
         return service.create(user, title);
     }

@@ -48,4 +48,9 @@ public class User {
     void onUpdate() {
         updatedAt = Instant.now();
     }
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider; // LOCAL or GOOGLE
+
+    private String providerId;
 }

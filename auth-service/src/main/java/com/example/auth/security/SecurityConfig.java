@@ -1,5 +1,7 @@
 package com.example.auth.security;
 
+import com.example.auth.security.oauth.CustomOAuth2UserService;
+import com.example.auth.security.oauth.OAuth2LoginSuccessHandler;
 import com.example.auth.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +33,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(
             HttpSecurity http,
-            @Autowired(required = false) @Nullable ClientRegistrationRepository clientRegistrations
+            CustomOAuth2UserService oAuth2UserService,
+            OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler
     ) throws Exception {
 
         var jwtFilter = new JwtAuthenticationFilter(jwtProvider, userDetailsService);
@@ -39,7 +42,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(req -> {
                     var c = new org.springframework.web.cors.CorsConfiguration();
-                    c.setAllowedOrigins(List.of("http://localhost:5173"));
+                    c.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:8081"));
                     c.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     c.setAllowedHeaders(List.of("*"));
                     c.setAllowCredentials(true);
@@ -47,29 +50,20 @@ public class SecurityConfig {
                 }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/actuator/**",
-                                "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html"
-                                // if you want to expose the OAuth2 authorize endpoint publicly:
-                                // , "/oauth2/**"
-                        ).permitAll()
+                        .requestMatchers("/api/auth/**", "/oauth2/**", "/login/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
-
-        // Only enable OAuth2 login if a ClientRegistrationRepository is present
-        if (clientRegistrations != null) {
-            http.oauth2Login(oauth -> {});
-            // And you can also permit the OAuth2 endpoints implicitly; no need for "/oauth2/**" in permitAll
-        }
+        http.oauth2Login(oauth -> oauth
+                .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService))
+                .successHandler(oAuth2LoginSuccessHandler)
+        );
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }

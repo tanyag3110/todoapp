@@ -219,7 +219,7 @@ public class UserService {
 
         passwordResetTokenRepository.save(prt);
 
-        String resetUrl = "http://localhost:8081/auth/reset-password-form?token=" + token;
+        String resetUrl = "http://localhost:5173/reset/" + token;
 
         emailService.sendEmail(user.getEmail(), "Password Reset Instructions",
                 "Click the link below to reset your password:\n\n" + resetUrl);

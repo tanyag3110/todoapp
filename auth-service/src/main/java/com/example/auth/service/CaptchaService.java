@@ -15,6 +15,9 @@ public class CaptchaService {
     private static final String VERIFY_URL =
             "https://www.google.com/recaptcha/api/siteverify";
 
+//    public CaptchaService(String secretKey, RestTemplate restTemplate) {
+//    }
+
     public boolean verify(String captchaResponse) {
         RestTemplate rest = new RestTemplate();
         Map response = rest.postForObject(
