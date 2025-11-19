@@ -4,28 +4,22 @@ import com.example.auth.entity.AuthProvider;
 import com.example.auth.entity.User;
 import com.example.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+public class CustomOAuth2UserService extends OidcUserService {
 
     private final UserRepository userRepository;
 
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest request) {
-        OAuth2User user = super.loadUser(request);
-
-        return new CustomOAuth2User(
-                user.getAuthorities(),
-                user.getAttributes(),
-                "sub"
-        );
+    public OidcUser loadUser(OidcUserRequest request) {
+        OidcUser oidcUser = super.loadUser(request);
+        return new CustomOAuth2User(oidcUser);
     }
-
 
     public User processOAuthPostLogin(CustomOAuth2User oAuthUser) {
 
@@ -49,7 +43,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user = User.builder()
                 .email(email)
                 .username(email)
-                .passwordHash("") // OAuth users don't need password
+                .passwordHash("") // No password for OAuth
                 .role("USER")
                 .enabled(true)
                 .locked(false)

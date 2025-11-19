@@ -11,6 +11,32 @@
             </list>
           </value>
         </entry>
+        <entry key="auth/controller/AuthController.java">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/controller/AuthController.java" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/controller/AuthController.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="auth/service/AuthService.java">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/AuthService.java" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/AuthService.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="auth/service/UserService.java">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/UserService.java" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/UserService.java" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/UserService.java" />
+              <option value="$PROJECT_DIR$/auth-service/src/main/java/com/example/auth/service/UserService.java" />
+            </list>
+          </value>
+        </entry>
         <entry key="build.gradle">
           <value>
             <list>
