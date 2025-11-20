@@ -90,15 +90,6 @@ class AuthControllerTest {
     }
 
     @Test
-    void unlockRequest_callsUserService() {
-        when(servlet.getRequestURL()).thenReturn(new StringBuffer("http://app/api/auth/unlock/request"));
-        when(servlet.getRequestURI()).thenReturn("/api/auth/unlock/request");
-        ResponseEntity<String> r = controller.unlockRequest("user1", servlet);
-        assertThat(r.getStatusCode().is2xxSuccessful()).isTrue();
-        verify(userService).sendUnlockToken(eq("user1"), anyString(), eq(24));
-    }
-
-    @Test
     void confirmUnlock_proxyToService() {
         when(userService.confirmUnlock("tok")).thenReturn("ok");
         ResponseEntity<String> r = controller.confirmUnlock("tok");

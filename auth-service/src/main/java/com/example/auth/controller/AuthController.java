@@ -65,13 +65,31 @@ public class AuthController {
         return req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort();
     }
 
-    @PostMapping("/unlock/request")
-    public ResponseEntity<String> unlockRequest(@RequestParam String username,
-                                                HttpServletRequest request) {
-        String appUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
-        userService.sendUnlockToken(username, appUrl, 24);
-        return ResponseEntity.ok("If the account exists and is locked, unlock email sent");
+//    @PostMapping("/unlock/request")
+//    public ResponseEntity<String> unlockRequest(@RequestParam String username,
+//                                                HttpServletRequest request) {
+//        String appUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+//        userService.sendUnlockToken(username, appUrl, 24);
+//        return ResponseEntity.ok("If the account exists and is locked, unlock email sent");
+//    }
+@PostMapping("/unlock/request")
+public ResponseEntity<?> unlockRequest(@RequestBody Map<String, String> body,
+                                       HttpServletRequest request) {
+
+    String username = body.get("username");
+    if (username == null || username.isBlank()) {
+        return ResponseEntity.badRequest().body("Username is required");
     }
+
+    // Build clean base URL (e.g., http://localhost:8081)
+    String appUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+
+    userService.sendUnlockToken(username, appUrl, 1); // 1-hour validity
+
+    // Generic message for security reasons
+    return ResponseEntity.ok("If the account exists and is locked, unlock email has been sent");
+}
+
 
     @GetMapping("/unlock/confirm")
     public ResponseEntity<String> confirmUnlock(@RequestParam String token) {
