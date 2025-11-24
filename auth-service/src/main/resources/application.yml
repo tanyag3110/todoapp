@@ -29,9 +29,9 @@ spring:
             user-name-attribute: sub  # OIDC standard
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/authdb
+    url: jdbc:postgresql://database-1.cmlmuc4mi04f.us-east-1.rds.amazonaws.com:5432/authdb
     username: postgres
-    password: 5432
+    password: Gudda1103
     driver-class-name: org.postgresql.Driver
 
   jpa:
