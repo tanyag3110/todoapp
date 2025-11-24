@@ -40,6 +40,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,info
+    endpoint:
+      health:
+        show-details: always
 
   mail:
     host: smtp.gmail.com
