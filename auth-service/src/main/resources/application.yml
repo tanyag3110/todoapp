@@ -31,7 +31,7 @@ spring:
   datasource:
     url: jdbc:postgresql://database-1.cmlmuc4mi04f.us-east-1.rds.amazonaws.com:5432/authdb
     username: postgres
-    password: Gudda1103
+    password: password
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -53,7 +53,7 @@ spring:
     host: smtp.gmail.com
     port: 587                     # use 465 if 587 is blocked on your normal network
     username: tanyastpauls@gmail.com   # e.g. your@gmail.com
-    password: qaaejupcpaodwyie   # 16-char App Password (NOT your Google password)
+    password: password   # 16-char App Password (NOT your Google password)
     properties:
       mail:
         smtp:
