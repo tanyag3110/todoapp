@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://database-1.cmlmuc4mi04f.us-east-1.rds.amazonaws.com:5432/tododb
     username: postgres
-    password: password
+    password: Gudda1103
   jpa:
     hibernate:
       ddl-auto: update
