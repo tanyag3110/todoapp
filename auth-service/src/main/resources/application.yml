@@ -16,7 +16,7 @@ spring:
           google:
             client-id: 1050885924853-pgkltulci69k13e183l8hor95a8c03qt.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: http://localhost:8081/login/oauth2/code/google
+            redirect-uri: https://listtodo.duckdns.org/login/oauth2/code/google
             scope:
               - openid
               - profile

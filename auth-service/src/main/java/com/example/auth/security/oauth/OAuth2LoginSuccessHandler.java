@@ -45,7 +45,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         } else {
             log.error("Unsupported principal type in OAuth2LoginSuccessHandler: {}", principal.getClass().getName());
             // fallback: redirect to frontend without tokens (safer than throwing)
-            res.sendRedirect("http://localhost:5173/login?error=unsupported_principal");
+            res.sendRedirect("https://listtodo.duckdns.org/login?error=unsupported_principal");
             return;
         }
 
@@ -58,7 +58,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         log.info("Generated tokens for user={} redirecting to frontend", savedUser.getUsername());
 
-        String redirectUrl = "http://localhost:5173/oauth2/callback"
+        String redirectUrl = "https://listtodo.duckdns.org/oauth2/callback"
                 + "?accessToken=" + URLEncoder.encode(accessToken, StandardCharsets.UTF_8)
                 + "&refreshToken=" + URLEncoder.encode(refreshToken, StandardCharsets.UTF_8);
         log.info("Full redirect URL: {}", redirectUrl);

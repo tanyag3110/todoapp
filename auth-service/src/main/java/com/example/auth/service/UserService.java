@@ -193,7 +193,7 @@ public class UserService {
                 .build();
         tokenRepo.save(ver);
 
-        String link = "http://localhost:8081/api/auth/confirm?token=" + token;
+        String link = "https://listtodo.duckdns.org/api/auth/confirm?token=" + token;
         String body = "<p>Your email has been updated. Confirm new email:</p>"
                 + "<p><a href=\"" + link + "\">Confirm</a></p>";
 
@@ -219,7 +219,7 @@ public class UserService {
 
         passwordResetTokenRepository.save(prt);
 
-        String resetUrl = "http://localhost:5173/reset/" + token;
+        String resetUrl = "https://listtodo.duckdns.org/reset/" + token;
 
         emailService.sendEmail(user.getEmail(), "Password Reset Instructions",
                 "Click the link below to reset your password:\n\n" + resetUrl);
