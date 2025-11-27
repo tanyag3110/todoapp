@@ -65,15 +65,8 @@ public class AuthController {
         return req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort();
     }
 
-//    @PostMapping("/unlock/request")
-//    public ResponseEntity<String> unlockRequest(@RequestParam String username,
-//                                                HttpServletRequest request) {
-//        String appUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
-//        userService.sendUnlockToken(username, appUrl, 24);
-//        return ResponseEntity.ok("If the account exists and is locked, unlock email sent");
-//    }
-@PostMapping("/unlock/request")
-public ResponseEntity<?> unlockRequest(@RequestBody Map<String, String> body,
+    @PostMapping("/unlock/request")
+    public ResponseEntity<?> unlockRequest(@RequestBody Map<String, String> body,
                                        HttpServletRequest request) {
 
     String username = body.get("username");

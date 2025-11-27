@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors->cors.configurationSource(request -> {
                     var config=new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:5173","http://34.232.84.229"));
+                    config.setAllowedOrigins(List.of("http://localhost:5173","http://34.232.84.229","https://listtodo.duckdns.org"));
                     config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(java.util.List.of("*"));
